@@ -28,7 +28,7 @@ app = Flask(__name__)
 #                     check_if_words_can_be_repeated( words[ location + 1 ], '' )
 
 #     return "ok", 200
-#
+
 def send_message( msg ):
     url = 'https://api.groupme.com/v3/bots/post'
 
