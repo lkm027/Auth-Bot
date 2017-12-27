@@ -2,6 +2,9 @@ import json
 
 from flask import Flask, request
 from urllib import parse
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
+import os
 import psycopg2
 
 app = Flask(__name__)
