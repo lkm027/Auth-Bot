@@ -28,22 +28,22 @@ def send_message( msg ):
     request = Request( url, urlencode( data ).encode() )
     json = urlopen( request ).read().decode()
 
-# try:
-#     parse.uses_netloc.append("postgres")
-#     url = parse.urlparse(os.environ["DATABASE_URL"])
+try:
+    parse.uses_netloc.append("postgres")
+    url = parse.urlparse(os.environ["DATABASE_URL"])
 
-#     conn = psycopg2.connect(
-#         database=url.path[1:],
-#         user=url.username,
-#         password=url.password,
-#         host=url.hostname,
-#         port=url.port
-#     )
+    conn = psycopg2.connect(
+        database=url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port
+    )
 
-#     cursor = conn.cursor()
-#     cursor.execute("""SELECT * FROM EXAMPLE""")
-#     rows = cursor.fetchall()
-#     for row in rows:
-#         send_message( row[1] )
-# except Exception as e:
-#     send_message( e )
+    cursor = conn.cursor()
+    cursor.execute("""SELECT * FROM EXAMPLE""")
+    rows = cursor.fetchall()
+    for row in rows:
+        send_message( row[1] )
+except Exception as e:
+    send_message( e )
