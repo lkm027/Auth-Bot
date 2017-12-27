@@ -38,7 +38,7 @@ def send_message( msg ):
             }
     request = Request( url, urlencode( data ).encode() )
     print( "request made" )
-    json = urlopen( request ).read().decode()
+    # json = urlopen( request ).read().decode()
     print( "url open worked" )
 
 send_message( 'Hello, I am a new bot' )
