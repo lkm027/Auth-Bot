@@ -40,10 +40,13 @@ try:
         host=url.hostname,
         port=url.port
     )
+    print( "Connection established" )
 
     cursor = conn.cursor()
     cursor.execute("""SELECT * FROM EXAMPLE""")
+    print( "Create cursor" )
     rows = cursor.fetchall()
+    print( cursor )
     for row in rows:
         send_message( row[1] )
 except Exception as e:
