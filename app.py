@@ -1,11 +1,10 @@
+import os
 import json
 
-from flask import Flask, request
-# from urllib import parse
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
-import os
-# import psycopg2
+
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -14,7 +13,7 @@ app = Flask(__name__)
 #     data = request.get_json()
 
 #     # We don't want to reply do ourselves!
-#     if( data['name'] != 'Real bot'):
+#     if( data['name'] != 'Baby DAD Bot'):
 #         phrase = data['text']
 #         location = check_if_im_is_used_and_get_position( phrase )
 #         if( location == -1 ):
@@ -37,9 +36,7 @@ def send_message( msg ):
             'text'   : msg,
             }
     request = Request( url, urlencode( data ).encode() )
-    print( "request made" )
-    # json = urlopen( request ).read().decode()
-    print( "url open worked" )
+    json = urlopen( request ).read().decode()
 
 send_message( 'Hello, I am a new bot' )
 
