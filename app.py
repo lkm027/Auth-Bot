@@ -4,10 +4,6 @@ from flask import Flask, request
 from urllib import parse
 import psycopg2
 
-from debugSentences import *
-from debugWords import *
-
-
 app = Flask(__name__)
 
 # @app.route( '/', methods=['POST'] )
