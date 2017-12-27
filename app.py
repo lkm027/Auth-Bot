@@ -4,6 +4,7 @@ import psycopg2
 
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+from urllib import parse
 
 from flask import Flask, request
 
@@ -30,6 +31,7 @@ def send_message( msg ):
     json = urlopen( request ).read().decode()
 
 try:
+    print( "Starting psql" )
     parse.uses_netloc.append("postgres")
     url = parse.urlparse(os.environ["DATABASE_URL"])
 
