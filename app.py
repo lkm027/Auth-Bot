@@ -28,9 +28,6 @@ def send_message( msg ):
     request = Request( url, urlencode( data ).encode() )
     json = urlopen( request ).read().decode()
 
-
-send_message( 'Hello, I am a new bot' )
-
 # try:
 #     parse.uses_netloc.append("postgres")
 #     url = parse.urlparse(os.environ["DATABASE_URL"])
