@@ -12,5 +12,5 @@ def get_members():
 
     r = requests.get( "https://api.groupme.com/v3/groups/" + group_id, data = json.dumps( {} ), headers = headers )
 
-    members = r.json["response"]["members"]
-    print( members[0]["nickname"] )
+    members = r.json()
+    print( members )
