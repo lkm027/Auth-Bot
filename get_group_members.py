@@ -16,5 +16,5 @@ def get_members():
 
     response = r.json()
     members = response['response']['members']
-    for( member in members ):
+    for member in members:
         send_groupme_message( member['nickname'] )
