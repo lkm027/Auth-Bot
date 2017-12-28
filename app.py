@@ -2,7 +2,6 @@ import os
 import json
 import psycopg2
 
-from urllib import parse
 from flask import Flask, request
 from get_group_members import get_members
 
