@@ -40,9 +40,7 @@ def is_group_members_table_empty():
         cursor = conn.cursor()
         cursor.execute("SELECT count(*) FROM EXAMPLE")
         rows = cursor.fetchall()
-        count = rows[0]
-        count = int( count[1] )
-        print( count )
+        print( rows[0][0] )
         # for row in rows:
         #     send_groupme_message( row[1] )
     except Exception as e:
