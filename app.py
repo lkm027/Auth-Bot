@@ -4,6 +4,7 @@ import psycopg2
 
 from urllib import parse
 from flask import Flask, request
+from get_group_members import get_members
 
 from send_message import send_groupme_message
 
@@ -17,6 +18,7 @@ def webhook():
     if( data['name'] != 'Auth Bot'):
         if( data["text"] == "Get members" ):
             send_groupme_message( "Not yet peasant" )
+            get_members()
 
     return "ok", 200
 
