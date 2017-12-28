@@ -1,4 +1,4 @@
-import request
+from flask import request
 import json
 import os
 
