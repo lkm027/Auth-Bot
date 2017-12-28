@@ -2,11 +2,10 @@ import os
 import json
 import psycopg2
 
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
 from urllib import parse
-
 from flask import Flask, request
+
+from send_message import send_groupme_message
 
 app = Flask(__name__)
 
@@ -21,18 +20,7 @@ app = Flask(__name__)
 #     return "ok", 200
 #
 
-def send_message( msg ):
-    url = 'https://api.groupme.com/v3/bots/post'
-
-    data = {
-            'bot_id' : os.getenv( 'GROUPME_BOT_ID'),
-            'text'   : msg,
-            }
-    request = Request( url, urlencode( data ).encode() )
-    json = urlopen( request ).read().decode()
-
 try:
-    print( "Starting psql" )
     parse.uses_netloc.append("postgres")
     url = parse.urlparse(os.environ["DATABASE_URL"])
 
@@ -43,14 +31,11 @@ try:
         host=url.hostname,
         port=url.port
     )
-    print( "Connection established" )
 
     cursor = conn.cursor()
     cursor.execute("""SELECT * FROM EXAMPLE""")
-    print( "Create cursor" )
     rows = cursor.fetchall()
-    print( cursor )
     for row in rows:
-        send_message( row[1] )
+        send_groupme_message( row[1] )
 except Exception as e:
     send_message( e )
