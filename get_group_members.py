@@ -10,6 +10,6 @@ def get_members():
 
     group_id = os.getenv( "GROUPME_GROUP_ID" )
 
-    request = requests.post( "https://api.groupme.com/v3/groups/" + group_id, data = json.dumps( {} ), headers = headers )
-    members = request.text.members
+    r = request.post( "https://api.groupme.com/v3/groups/" + group_id, data = json.dumps( {} ), headers = headers )
+    members = r.text.members
     print( members )
