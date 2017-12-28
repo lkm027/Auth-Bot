@@ -1,5 +1,6 @@
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+import os
 
 def send_groupme_message( msg ):
     url = 'https://api.groupme.com/v3/bots/post'
