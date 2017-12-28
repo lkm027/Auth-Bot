@@ -16,7 +16,7 @@ def webhook():
     # We don't want to reply do ourselves!
     if( data['name'] != 'Auth Bot'):
         if( data["text"] == "Get members" ):
-            send_message( "Not yet peasant" )
+            send_groupme_message( "Not yet peasant" )
 
     return "ok", 200
 
