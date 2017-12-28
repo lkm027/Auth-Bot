@@ -38,7 +38,7 @@ def is_group_members_table_empty():
         )
 
         cursor = conn.cursor()
-        cursor.execute("""SELECT count(*) FROM EXAMPLE""")
+        cursor.execute("SELECT count(*) FROM EXAMPLE")
         rows = cursor.fetchall()
         print( rows[0] )
         # for row in rows:
