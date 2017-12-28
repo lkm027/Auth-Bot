@@ -1,4 +1,4 @@
-import request
+import requests
 import json
 import os
 
@@ -10,6 +10,7 @@ def get_members():
 
     group_id = os.getenv( "GROUPME_GROUP_ID" )
 
-    r = request.get( "https://api.groupme.com/v3/groups/" + group_id, data = json.dumps( {} ), headers = headers )
+    r = requests.get( "https://api.groupme.com/v3/groups/" + group_id, data = json.dumps( {} ), headers = headers )
+    print( r.text )
     members = r.text.members
     print( members )
