@@ -3,7 +3,7 @@ import json
 import psycopg2
 
 from flask import Flask, request
-from get_group_members import get_members
+from get_group_members import check_and_add_members_if_none_exist
 
 
 app = Flask(__name__)
@@ -14,8 +14,8 @@ def webhook():
 
     # We don't want to reply do ourselves!
     if( data['name'] != 'Auth Bot'):
-        if( data["text"] == "Get members" ):
-            get_members()
+        if( data["text"] == "Add members" ):
+            check_and_add_members_if_none_exist()
 
     return "ok", 200
 
