@@ -20,6 +20,7 @@ def get_members():
     members = response['response']['members']
 
     is_group_members_table_empty()
+    check_if_member_table_exists()
 
     for member in members:
         send_groupme_message( member['nickname'] )
@@ -40,9 +41,38 @@ def is_group_members_table_empty():
         cursor = conn.cursor()
         cursor.execute("SELECT count(*) FROM EXAMPLE")
         rows = cursor.fetchall()
-        print( rows[0][0] )
-        # for row in rows:
-        #     send_groupme_message( row[1] )
+        cursor.close()
+        conn.close()
+
+        if( rows[0][0] == 0 ):
+            return false
+
+        return true
+
     except Exception as e:
         print( "Connecting to db failed for some reason" )
         print( e )
+
+def check_if_member_table_exists():
+    try:
+        parse.uses_netloc.append("postgres")
+        url = parse.urlparse(os.environ["DATABASE_URL"])
+
+        conn = psycopg2.connect(
+            database=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
+        )
+
+        cursor = conn.cursor()
+        cursor.execute( """SELECT EXISTS (
+                            SELECT 1 FROM information_schema.tables
+                            WHERE table_schema = 'public'
+                            AND table_name = 'members' );""" )
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        print( rows[0] )
