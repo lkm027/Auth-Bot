@@ -76,3 +76,5 @@ def check_if_member_table_exists():
         conn.close()
 
         print( rows[0] )
+    except Exception as e:
+        print( "Connecting went wrong somewhere" )
