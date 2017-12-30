@@ -27,7 +27,6 @@ def get_members_and_add_to_table():
     response = r.json()
     members = response['response']['members']
 
-    print( 'made it here' )
     for member in members:
         send_groupme_message( member['nickname'] )
         try:
@@ -98,11 +97,10 @@ def is_group_members_table_empty():
         cursor.close()
         conn.close()
 
-        print( rows[0][0] )
         if( rows[0][0] == 0 ):
-            return False
+            return True
 
-        return True
+        return False
 
     except Exception as e:
         print( "Connecting to db failed for some reason" )
