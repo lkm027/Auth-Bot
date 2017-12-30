@@ -47,6 +47,7 @@ def get_members_and_add_to_table():
             cursor = conn.cursor()
             cursor.execute( "INSERT INTO members VALUES ( " + member['user_id'] + ", False );" )
             cursor.close()
+            conn.commit()
             conn.close()
 
         except Exception as e:
@@ -74,6 +75,7 @@ def create_members_table():
 
         print( "Created a new table bro" )
         cursor.close()
+        conn.commit()
         conn.close()
 
     except Exception as e:
