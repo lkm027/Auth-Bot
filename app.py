@@ -12,12 +12,16 @@ app = Flask(__name__)
 def webhook():
     data = request.get_json()
 
+    print( data["text"] )
+    print( data["name"] )
+
     # We don't want to reply do ourselves!
     if( data['name'] != os.getenv( "BOT_NAME" ) ):
         words = str.split( data["text"] )
         if( words[0].lower() == "@auth" and words[1].lower() == "bot" ):
             check_all_commands( data["text"] )
     elif( data['name'] == "GroupMe" ):
+        print( "made it here" )
         phrase = data["text"]
         if( "changed name to" in phrase ):
             print( "In it" )
