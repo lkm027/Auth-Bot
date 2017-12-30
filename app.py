@@ -5,6 +5,7 @@ import psycopg2
 from flask import Flask, request
 
 from commands import check_all_commands
+from change_name import change_name
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ def webhook():
         if( words[0].lower() == "@auth" and words[1].lower() == "bot" ):
             check_all_commands( data["text"] )
 
+    # As of now this path is only if someone changes their name. We want to update their name in our db so that we can easily find them later
     if( data['name'] == "GroupMe" ):
         phrase = data["text"]
         if( "changed name to" in phrase ):
@@ -30,9 +32,6 @@ def webhook():
             to_index = changed_index + 3
             name_before_change = " ".join( words[:changed_index] )
             name_after_change  = " ".join( words[to_index:] )
-
-            print( name_after_change )
-            print( name_before_change )
-
+            change_name( name_before_change, name_after_change )
 
     return "ok", 200

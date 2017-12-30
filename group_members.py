@@ -55,7 +55,7 @@ def get_members_and_add_to_table():
     for member in members:
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute( "INSERT INTO tb_members( user_id, is_admin, kicked, warnings ) VALUES ( " + member['user_id'] + ", False, NULL, 0 );" )
+        cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + member["nickname"] + ", " + member['user_id'] + ", False, NULL, 0 );" )
         cursor.close()
         conn.commit()
         conn.close()
@@ -65,6 +65,7 @@ def create_members_table():
     cursor = conn.cursor()
     cursor.execute( """CREATE TABLE tb_members
                         ( id SERIAL PRIMARY KEY,
+                          nickname VARCHAR(120),
                           user_id VARCHAR(80),
                           is_admin BOOLEAN,
                           kicked DATE,
