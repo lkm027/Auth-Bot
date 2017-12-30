@@ -45,7 +45,7 @@ def get_members_and_add_to_table():
             )
 
             cursor = conn.cursor()
-            cursor.execute( "INSERT INTO members VALUES ( " + member['user_id'] + ", False );" )
+            cursor.execute( "INSERT INTO members( user_id, is_admin ) VALUES ( " + member['user_id'] + ", False );" )
             cursor.close()
             conn.commit()
             conn.close()
@@ -73,7 +73,6 @@ def create_members_table():
                               user_id VARCHAR(80),
                               is_admin BOOLEAN );""" )
 
-        print( "Created a new table bro" )
         cursor.close()
         conn.commit()
         conn.close()
@@ -96,7 +95,7 @@ def is_group_members_table_empty():
         )
 
         cursor = conn.cursor()
-        cursor.execute("SELECT count(*) FROM EXAMPLE")
+        cursor.execute("SELECT count(*) FROM members")
         rows = cursor.fetchall()
         cursor.close()
         conn.close()
@@ -132,9 +131,7 @@ def check_if_member_table_exists():
         cursor.close()
         conn.close()
 
-        print( rows[0][0] )
         if( rows[0][0] == False ):
-            print( "Returned False" )
             return False
 
         return True
