@@ -25,9 +25,8 @@ def webhook():
             last_index = 0
             for index, word in enumerate( words ):
                 if( word == "changed" ):
-                    last_index = index - 1
+                    last_index = index
                     break
-            print( index )
             name_before_change = " ".join( words[:last_index] )
             print( name_before_change )
 
