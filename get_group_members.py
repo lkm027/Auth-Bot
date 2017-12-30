@@ -98,6 +98,7 @@ def is_group_members_table_empty():
         cursor.close()
         conn.close()
 
+        print( rows[0][0] )
         if( rows[0][0] == 0 ):
             return False
 
