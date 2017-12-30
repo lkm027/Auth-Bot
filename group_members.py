@@ -31,6 +31,9 @@ def check_and_add_members_if_none_exist():
         create_members_table()
     if( is_group_members_table_empty() ):
         get_members_and_add_to_table()
+
+    send_groupme_message( "Retrieved all group members" )
+
     return True
 
 
@@ -56,8 +59,6 @@ def get_members_and_add_to_table():
         cursor.close()
         conn.commit()
         conn.close()
-
-    send_groupme_message( "Retrieved all group members" )
 
 def create_members_table():
     conn = get_db_connection()
