@@ -11,6 +11,8 @@ app = Flask(__name__)
 @app.route( '/', methods=['POST'] )
 def webhook():
     data = request.get_json()
+    print( data['name'] )
+    print( data['text'] )
 
     # We don't want to reply do ourselves!
     if( data['name'] != os.getenv( "BOT_NAME" ) ):
