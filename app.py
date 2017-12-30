@@ -20,6 +20,7 @@ def webhook():
     elif( data['name'] == "GroupMe" ):
         phrase = data["text"]
         if( "changed name to" in phrase ):
+            print( "In it" )
             words = str.split( phrase )
             last_index = 0
             for index, word in enumerate( words ):
