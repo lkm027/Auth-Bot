@@ -49,9 +49,9 @@ def get_members_and_add_to_table():
             cursor.close()
             conn.close()
 
-    except Exception as e:
-        print( "Could add new members to members table." )
-        print( e )
+        except Exception as e:
+            print( "Could add new members to members table." )
+            print( e )
 
 def create_members_table():
     try:
