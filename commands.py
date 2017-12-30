@@ -6,7 +6,7 @@ def check_all_commands( command ):
     words = str.split( command )
     words.pop( 0 )
     words.pop( 0 )
-    command = "".join( words )
+    command = " ".join( words )
 
     command.lower()
     print( command )
