@@ -3,6 +3,7 @@ from group_members import check_and_add_members_if_none_exist
 
 def check_all_commands( command ):
     command.lower()
+    print( command )
     return {
             "retrieve members" : retrieve_members()
             }.get( command, send_groupme_message( "That command does not exist" ) )
