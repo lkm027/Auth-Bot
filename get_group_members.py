@@ -27,9 +27,7 @@ def get_members_and_add_to_table():
     response = r.json()
     members = response['response']['members']
 
-    is_group_members_table_empty()
-    check_if_member_table_exists()
-
+    print( 'made it here' )
     for member in members:
         send_groupme_message( member['nickname'] )
         try:
