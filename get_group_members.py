@@ -42,7 +42,7 @@ def get_members_and_add_to_table():
             )
 
             cursor = conn.cursor()
-            cursor.execute( "INSERT INTO members( user_id, is_admin, kicked ) VALUES ( " + member['user_id'] + ", False, null );" )
+            cursor.execute( "INSERT INTO tb_members( user_id, is_admin, kicked ) VALUES ( " + member['user_id'] + ", False, NULL );" )
             cursor.close()
             conn.commit()
             conn.close()
@@ -65,7 +65,7 @@ def create_members_table():
         )
 
         cursor = conn.cursor()
-        cursor.execute( """CREATE TABLE members
+        cursor.execute( """CREATE TABLE tb_members
                             ( id SERIAL PRIMARY KEY,
                               user_id VARCHAR(80),
                               is_admin BOOLEAN,
@@ -93,7 +93,7 @@ def is_group_members_table_empty():
         )
 
         cursor = conn.cursor()
-        cursor.execute("SELECT count(*) FROM members")
+        cursor.execute("SELECT count(*) FROM tb_members")
         rows = cursor.fetchall()
         cursor.close()
         conn.close()
@@ -124,7 +124,7 @@ def check_if_member_table_exists():
         cursor.execute( """SELECT EXISTS (
                             SELECT 1 FROM information_schema.tables
                             WHERE table_schema = 'public'
-                            AND table_name = 'members' );""" )
+                            AND table_name = 'tb_members' );""" )
         rows = cursor.fetchall()
         cursor.close()
         conn.close()
