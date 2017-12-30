@@ -3,7 +3,7 @@ import json
 import psycopg2
 
 from flask import Flask, request
-from get_group_members import check_and_add_members_if_none_exist
+from group_members import check_and_add_members_if_none_exist
 
 
 app = Flask(__name__)
