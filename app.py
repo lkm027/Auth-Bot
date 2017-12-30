@@ -5,7 +5,7 @@ import psycopg2
 from flask import Flask, request
 
 from commands import check_all_commands
-from change_name import change_name
+# from change_name import change_name
 
 app = Flask(__name__)
 
