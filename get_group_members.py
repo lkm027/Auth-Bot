@@ -128,7 +128,7 @@ def check_if_member_table_exists():
         cursor.close()
         conn.close()
 
-        if( rows[0][0] == False )
+        if( rows[0][0] == False ):
             return False
 
         return True
