@@ -17,7 +17,7 @@ def webhook():
         words = str.split( data["text"] )
         print( words[0] )
         print( words[1] )
-        if( words[0].lower() == "@Auth" and words[1].lower() == "Bot" ):
+        if( words[0].lower() == "@auth" and words[1].lower() == "bot" ):
             check_all_commands( data["text"] )
 
     return "ok", 200
