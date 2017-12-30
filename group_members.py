@@ -65,7 +65,7 @@ def create_members_table():
     cursor = conn.cursor()
     cursor.execute( """CREATE TABLE tb_members
                         ( id SERIAL PRIMARY KEY,
-                          nickname VARCHAR(120),
+                          nickname TEXT,
                           user_id VARCHAR(80),
                           is_admin BOOLEAN,
                           kicked DATE,
