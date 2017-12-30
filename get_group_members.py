@@ -71,6 +71,8 @@ def create_members_table():
                             ( id SERIAL PRIMARY KEY,
                               user_id VARCHAR(80),
                               is_admin BOOLEAN );""" )
+
+        print( "Created a new table bro" )
         cursor.close()
         conn.close()
 
