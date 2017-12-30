@@ -57,6 +57,8 @@ def get_members_and_add_to_table():
         conn.commit()
         conn.close()
 
+    send_groupme_message( "Retrieved all group members" )
+
 def create_members_table():
     conn = get_db_connection()
     cursor = conn.cursor()
