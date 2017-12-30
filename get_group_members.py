@@ -67,10 +67,10 @@ def create_members_table():
         )
 
         cursor = conn.cursor()
-        cursor.execute( """CREATE TABLE members 
-                            ( id SERIAL PRIMARY KEY, 
-                              name VARCHAR(80),
-                              isAdmin BOOLEAN );""" )
+        cursor.execute( """CREATE TABLE members
+                            ( id SERIAL PRIMARY KEY,
+                              user_id VARCHAR(80),
+                              is_admin BOOLEAN );""" )
         cursor.close()
         conn.close()
 
@@ -128,7 +128,9 @@ def check_if_member_table_exists():
         cursor.close()
         conn.close()
 
+        print( rows[0][0] )
         if( rows[0][0] == False ):
+            print( "Returned False" )
             return False
 
         return True
