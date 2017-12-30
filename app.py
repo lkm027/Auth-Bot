@@ -20,7 +20,8 @@ def webhook():
         words = str.split( data["text"] )
         if( words[0].lower() == "@auth" and words[1].lower() == "bot" ):
             check_all_commands( data["text"] )
-    elif( data['name'] == "GroupMe" ):
+
+    if( data['name'] == "GroupMe" ):
         print( "made it here" )
         phrase = data["text"]
         if( "changed name to" in phrase ):
