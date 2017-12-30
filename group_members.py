@@ -27,9 +27,9 @@ def get_db_connection():
         print( e )
 
 def check_and_add_members_if_none_exist():
-    if( check_if_member_table_exists() == False ):
+    if( not check_if_member_table_exists() ):
         create_members_table()
-    if( is_group_members_table_empty() == True ):
+    if( is_group_members_table_empty() ):
         get_members_and_add_to_table()
     return True
 
@@ -94,7 +94,7 @@ def check_if_member_table_exists():
     cursor.close()
     conn.close()
 
-    if( rows[0][0] == False ):
+    if( not rows[0][0] ):
         return False
 
     return True
