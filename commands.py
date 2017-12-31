@@ -15,6 +15,7 @@ def check_all_commands( command ):
         retrieve_members()
     elif( command == "salt" ):
         salt()
+    elif( command == "utf" ):
     else:
         send_groupme_message( "That command does not exist" )
 
@@ -24,3 +25,6 @@ def retrieve_members():
 
 def salt():
     send_groupme_message( "https://media.giphy.com/media/3o7P4F86TAI9Kz7XYk/giphy.gif" )
+
+def utf():
+    send_groupme_message( u'\1F60d' )
