@@ -23,7 +23,8 @@ def webhook():
         words = str.split( data["text"] )
         if( words[0].lower() == "@auth" and words[1].lower() == "bot" ):
             check_all_commands( data["text"] )
-
+    # While this operation is currently not necesarry, I am going to keep it for now. It can, however be sped up and optimized
+    # TODO Optimize this method to not worry about the user's original name. All we really need is their user_id and the name they change to.
     # As of now this path is only if someone changes their name. We want to update their name in our db so that we can easily find them later
     if( data['name'] == "GroupMe" ):
         phrase = data["text"]
