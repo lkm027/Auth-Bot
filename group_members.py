@@ -55,6 +55,8 @@ def get_members_and_add_to_table():
     for member in members:
         conn = get_db_connection()
         cursor = conn.cursor()
+        if( os.getenv( "OWNER" ) == member['nickname'] ):
+            cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member['nickname'] + "'" + ", " + member['user_id'] + ", True, NULL, 0 );" )
         cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member['nickname'] + "'" + ", " + member['user_id'] + ", False, NULL, 0 );" )
         cursor.close()
         conn.commit()
