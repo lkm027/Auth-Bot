@@ -1,3 +1,7 @@
+import psycopg2
+
+from urllib import parse
+
 def change_name( name_before, name_after ):
     conn = get_db_connection()
     cursor = conn.cursor()
