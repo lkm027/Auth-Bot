@@ -18,7 +18,7 @@ def check_if_member_is_admin( member_id ):
 
 def add_warning_to_member( member_id, member_name ):
     conn = get_db_connection()
-    curosr = conn.cursor()
+    cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members WHERE user_id='" + member_id + "';" )
     rows = cursor.fetchall()
     warnings_count = rows[0][5] + 1
