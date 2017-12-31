@@ -19,8 +19,8 @@ def change_db_name_entry( name_before, name_after ):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute( "UPDATE tb_members set nickname='" + name_after + "' WHERE nickname='" + name_before + "';" )
-    cursor.commit()
     cursor.close()
+    conn.commit()
     conn.close()
 
 def get_db_connection():
