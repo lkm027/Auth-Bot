@@ -8,7 +8,8 @@ def check_if_member_is_admin( member ):
     cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members WHERE nickname='" + member + "';" )
     rows = cursor.fetchall()
-    print( rows[0] )
+    if( not rows[0][3] ):
+        print( "User is not an admin" )
     cursor.close()
     conn.close()
 

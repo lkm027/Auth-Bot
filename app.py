@@ -18,7 +18,7 @@ def webhook():
     if( data['name'] != os.getenv( "BOT_NAME" ) ):
 
         check_if_member_is_admin( data[ 'name'] )
-        print( data['id'] )
+        print( data['user_id'] )
 
         words = str.split( data["text"] )
         if( words[0].lower() == "@auth" and words[1].lower() == "bot" ):
