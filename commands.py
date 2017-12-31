@@ -1,6 +1,8 @@
 from send_message import send_groupme_message
 from group_members import check_and_add_members_if_none_exist
 
+import emoji
+
 def check_all_commands( command ):
     # Remove the auth bot call from our command
     words = str.split( command )
@@ -28,4 +30,4 @@ def salt():
     send_groupme_message( "https://media.giphy.com/media/3o7P4F86TAI9Kz7XYk/giphy.gif" )
 
 def utf():
-    send_groupme_message( u'\1F60d' )
+    send_groupme_message( emoji.emojize( "Tequila Holiday :cocktail_glass:", use_aliases=True )
