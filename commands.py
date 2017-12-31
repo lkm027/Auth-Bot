@@ -16,6 +16,7 @@ def check_all_commands( command ):
     elif( command == "salt" ):
         salt()
     elif( command == "utf" ):
+        utf()
     else:
         send_groupme_message( "That command does not exist" )
 
