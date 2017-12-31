@@ -25,10 +25,3 @@ def check_all_commands( command ):
 # Retrieves all members in a group and stores them within our db
 def retrieve_members():
     check_and_add_members_if_none_exist()
-
-def salt():
-    send_groupme_message( "https://media.giphy.com/media/3o7P4F86TAI9Kz7XYk/giphy.gif" )
-
-def utf():
-    send_groupme_message( emoji.emojize( "Actually it's\n:sparkles::cocktail_glass: Tequila Holiday :cocktail_glass::sparkles:", use_aliases = True ) )
-    send_groupme_message( emoji.emojize( "It's actually\n:sparkles::cocktail_glass: Tequila Holiday :cocktail_glass::sparkles:", use_aliases = True ) )
