@@ -7,8 +7,8 @@ def check_if_member_is_admin( member ):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members WHERE nickname='" + member + "';" )
-    cursor.fetchall()
-    print( cursor[0] )
+    rows = cursor.fetchall()
+    print( rows[0] )
     cursor.close()
     conn.close()
 
