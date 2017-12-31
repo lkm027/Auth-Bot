@@ -6,6 +6,7 @@ from flask import Flask, request
 
 from commands import check_all_commands
 from change_name import change_name
+from member_post import check_if_member_is_admin
 
 app = Flask(__name__)
 
@@ -15,6 +16,10 @@ def webhook():
 
     # We don't want to reply do ourselves!
     if( data['name'] != os.getenv( "BOT_NAME" ) ):
+
+        check_if_member_is_admin( data[ 'name'] )
+        print( data['id'] )
+
         words = str.split( data["text"] )
         if( words[0].lower() == "@auth" and words[1].lower() == "bot" ):
             check_all_commands( data["text"] )
