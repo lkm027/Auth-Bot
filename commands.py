@@ -31,4 +31,4 @@ def salt():
 
 def utf():
     send_groupme_message( emoji.emojize( ":cocktail_glass:Tequila Holiday:cocktail_glass:", use_aliases = True ) )
-    send_groupme_message( emoji.emojize( ":cocktail_glass: Tequila Holiday :cocktail_glass:", use_aliases = True ) )
+    send_groupme_message( emoji.emojize( ":sparkles::cocktail_glass: Tequila Holiday :cocktail_glass::sparkles:", use_aliases = True ) )
