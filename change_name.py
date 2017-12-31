@@ -16,7 +16,12 @@ def change_name( name_before, name_after ):
     conn.close()
 
 def change_db_name_entry( name_before, name_after ):
-    print( "There existed a name before" )
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "UPDATE tb_members set nickname='" + name_after + "' WHERE nickname='" + name_before + "';" )
+    cursor.commit()
+    cursor.close()
+    conn.close()
 
 def get_db_connection():
     try:
