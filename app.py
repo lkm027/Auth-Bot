@@ -18,7 +18,7 @@ def webhook():
     if( data['name'] != os.getenv( "BOT_NAME" ) ):
 
         # Add warning to user if they are not an admin
-        if( check_if_member_is_admin( data['user_id'] ) ):
+        if( not check_if_member_is_admin( data['user_id'] ) ):
             add_warning_to_member( data['user_id'], data['name'] )
 
         words = str.split( data["text"] )
