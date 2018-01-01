@@ -26,34 +26,46 @@ def get_db_connection():
         print( "Could not establish a connection with the database." )
         print( e )
 
-def find_member( person ):
+def pardon( member ):
     conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + name_before + "';" )
+    rows = cursor.fetchall()
+    if( rows[0][0] != 0 ):
+        remove_warning_from_member( member )
+    else:
+        print( "The user before does not exist within the database." )
+    cursor.close()
+    conn.close()
 
-    members = get_group_members()
-    for member in members:
+def remove_warning_from_member( member ):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "SELECT * FROM tb_members WHERE user_id='" + member_id + "';" )
+    rows = cursor.fetchall()
+    warnings_count = rows[0][5] - 1
+    cursor.execute( "UPDATE tb_members set warnings=" + str( warnings_count ) + " where user_id='" + member_id + "';" )
 
+    send_groupme_message( member_name + ", you will be kicked on your 3rd warning. Please do not post again. Your current warning count: " + str( warnings_count ) + "." )
+    conn.commit()
+    cursor.close()
+    conn.close()
 
-def get_group_members():
-    headers = {
-            "X-Access-Token" : os.getenv( "USER_ID" ),
-            "Content-type"   : "application/json"
-            }
+def get_db_connection():
+    try:
+        parse.uses_netloc.append("postgres")
+        url = parse.urlparse(os.environ["DATABASE_URL"])
 
-    group_id = os.getenv( "GROUPME_GROUP_ID" )
+        conn = psycopg2.connect(
+            database=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
+        )
 
-    # Grab a list of the current users in the group
-    r = requests.get( "https://api.groupme.com/v3/groups/" + group_id, data = json.dumps( {} ), headers = headers )
+        return conn
 
-    response = r.json()
-    members = response['response']['members']
-
-    return members
-
-    # Iterate through each person currently in the group and add them to our members table
-    for member in members:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute( "INSERT INTO tb_members( user_id, is_admin, kicked, warnings ) VALUES ( " + member['user_id'] + ", False, NULL, 0 );" )
-        cursor.close()
-        conn.commit()
-        conn.close()
+    except Exception as e:
+        print( "Could not establish a connection with the database." )
+        print( e )
