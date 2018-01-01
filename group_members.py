@@ -26,18 +26,36 @@ def get_db_connection():
         print( "Could not establish a connection with the database." )
         print( e )
 
-def check_and_add_members_if_none_exist():
+def update_members_list():
     if( not check_if_member_table_exists() ):
         create_members_table()
-    if( is_group_members_table_empty() ):
-        get_members_and_add_to_table()
+    members = get_members_list()
+    update_table( members )
 
     send_groupme_message( "Retrieved all group members" )
 
     return True
 
+def update_table( members ):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    for member in members():
+        member_id = member["user_id"]
+        member_name = member["nickname"]
+        cursor.execute( "SELECT COUNT(*) FROM tb_members where user_id='" + member_id + "';" )
+        rows = cursor.fetchall()
+        count = rows[0][0]
+        if( count == 0 ):
+            # When the first update is called we want to automatically make the owner an admin
+            if( os.getenv( "OWNER" ) == member['nickname'] ):
+                cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member['nickname'] + "'" + ", " + member['user_id'] + ", True, NULL, 0 );" )
+            else:
+                cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member['nickname'] + "'" + ", " + member['user_id'] + ", False, NULL, 0 );" )
+    conn.commit()
+    cursor.close()
+    conn.close()
 
-def get_members_and_add_to_table():
+def get_members_list():
     headers = {
             "X-Access-Token" : os.getenv( "USER_ID" ),
             "Content-type"   : "application/json"
@@ -50,18 +68,7 @@ def get_members_and_add_to_table():
 
     response = r.json()
     members = response['response']['members']
-
-    # Iterate through each person currently in the group and add them to our members table
-    for member in members:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        if( os.getenv( "OWNER" ) == member['nickname'] ):
-            cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member['nickname'] + "'" + ", " + member['user_id'] + ", True, NULL, 0 );" )
-        else:
-            cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member['nickname'] + "'" + ", " + member['user_id'] + ", False, NULL, 0 );" )
-        cursor.close()
-        conn.commit()
-        conn.close()
+    return members
 
 def create_members_table():
     conn = get_db_connection()
@@ -78,18 +85,18 @@ def create_members_table():
     conn.commit()
     conn.close()
 
-def is_group_members_table_empty():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT count(*) FROM tb_members")
-    rows = cursor.fetchall()
-    cursor.close()
-    conn.close()
+# def is_group_members_table_empty():
+#     conn = get_db_connection()
+#     cursor = conn.cursor()
+#     cursor.execute("SELECT count(*) FROM tb_members")
+#     rows = cursor.fetchall()
+#     cursor.close()
+#     conn.close()
 
-    if( rows[0][0] == 0 ):
-        return True
+#     if( rows[0][0] == 0 ):
+#         return True
 
-    return False
+#     return False
 
 def check_if_member_table_exists():
     conn = get_db_connection()
