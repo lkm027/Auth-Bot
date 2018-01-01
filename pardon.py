@@ -32,7 +32,7 @@ def pardon( member ):
     if( rows[0][0] != 0 ):
         cursor.execute( "SELECT * FROM tb_members where nickname='" + member + "';" )
         rows = cursor.fetchall()
-        rows[0][3] = is_admin
+        is_admin = rows[0][3]
         if( is_admin ):
             remove_warning_from_member( member )
     else:
