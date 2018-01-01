@@ -55,6 +55,8 @@ def update_table( members ):
     cursor.close()
     conn.close()
 
+    send_groupme_message( "Members successfully updated." )
+
 def get_members_list():
     headers = {
             "X-Access-Token" : os.getenv( "USER_ID" ),
