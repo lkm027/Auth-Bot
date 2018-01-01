@@ -5,7 +5,7 @@ import emoji
 from urllib import parse
 
 from send_message import send_groupme_message
-from group_members import check_and_add_members_if_none_exist
+from group_members import update_members_list
 from pardon import pardon
 
 def check_all_commands( command, member ):
@@ -20,8 +20,8 @@ def check_all_commands( command, member ):
     command.lower()
 
     # Check our list of commands
-    if( command == "retrieve members" ):
-        retrieve_members()
+    if( command == "update members" ):
+        update_members()
     elif( "pardon" in command ):
         words = str.split( command )
         words.pop(0)
@@ -31,8 +31,8 @@ def check_all_commands( command, member ):
         send_groupme_message( "That command does not exist" )
 
 # Retrieves all members in a group and stores them within our db
-def retrieve_members():
-    check_and_add_members_if_none_exist()
+def update_members():
+    update_members_list()
 
 def pardon_member( member ):
     pardon( member )
