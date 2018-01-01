@@ -45,7 +45,7 @@ def is_member_admin( member ):
     if( rows[0][0] != 0 ):
         cursor.execute( "SELECT * FROM tb_members where nickname='" + member + "';" )
         rows = cursor.fetchall()
-        rows[0][3] = is_admin
+        is_admin = rows[0][3]
         if( is_admin ):
             return True
         return False
