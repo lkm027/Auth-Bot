@@ -27,6 +27,7 @@ def get_db_connection():
         print( e )
 
 def update_members_list():
+    print( "Updating members list" )
     if( not check_if_member_table_exists() ):
         print( "Create table called" )
         create_members_table()
@@ -109,6 +110,8 @@ def check_if_member_table_exists():
     rows = cursor.fetchall()
     cursor.close()
     conn.close()
+    print( "Printing rows" )
+    print( rows )
     print( rows[0] )
 
     if( not rows[0][0] ):
