@@ -32,13 +32,14 @@ def pardon( member ):
     cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + member + "';" )
     rows = cursor.fetchall()
     if( rows[0][0] != 0 ):
-        remove_warning_from_member( member )
+        member_id = rows[0][2]
+        remove_warning_from_member( member_id )
     else:
         print( "The user before does not exist within the database." )
     cursor.close()
     conn.close()
 
-def remove_warning_from_member( member ):
+def remove_warning_from_member( member_id ):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members WHERE user_id='" + member_id + "';" )
