@@ -47,7 +47,7 @@ def remove_warning_from_member( member_id ):
     warnings_count = rows[0][5] - 1
     cursor.execute( "UPDATE tb_members set warnings=" + str( warnings_count ) + " where user_id='" + member_id + "';" )
 
-    send_groupme_message( member_name + ", you will be kicked on your 3rd warning. Please do not post again. Your current warning count: " + str( warnings_count ) + "." )
+    send_groupme_message( "Congrats " + member_name + "! You have been pardon by the almighty overlords. Your current warning count: " + str( warnings_count ) + "." )
     conn.commit()
     cursor.close()
     conn.close()
