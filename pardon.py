@@ -32,22 +32,21 @@ def pardon( member ):
     cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + member + "';" )
     rows = cursor.fetchall()
     if( rows[0][0] != 0 ):
-        member_id = rows[0][2]
-        remove_warning_from_member( member_id )
+        remove_warning_from_member( member )
     else:
         print( "The user before does not exist within the database." )
     cursor.close()
     conn.close()
 
-def remove_warning_from_member( member_id ):
+def remove_warning_from_member( member ):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute( "SELECT * FROM tb_members WHERE user_id='" + member_id + "';" )
+    cursor.execute( "SELECT * FROM tb_members WHERE nickname='" + member + "';" )
     rows = cursor.fetchall()
     warnings_count = rows[0][5] - 1
-    cursor.execute( "UPDATE tb_members set warnings=" + str( warnings_count ) + " where user_id='" + member_id + "';" )
+    cursor.execute( "UPDATE tb_members set warnings=" + str( warnings_count ) + " where nickname='" + member + "';" )
 
-    send_groupme_message( "Congrats " + member_name + "! You have been pardon by the almighty overlords. Your current warning count: " + str( warnings_count ) + "." )
+    send_groupme_message( "Congrats " + member + "! You have been pardon by the almighty overlords. Your current warning count: " + str( warnings_count ) + "." )
     conn.commit()
     cursor.close()
     conn.close()
