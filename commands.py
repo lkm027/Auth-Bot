@@ -16,7 +16,7 @@ def check_all_commands( command ):
     # Check our list of commands
     if( command == "retrieve members" ):
         retrieve_members()
-    elif( command == "pardon" ):
+    elif( "pardon" in command ):
         words = str.split( command )
         words.pop(0)
         member = " ".join( words )
