@@ -5,7 +5,7 @@ import emoji
 from urllib import parse
 
 from send_message import send_groupme_message
-from group_members import update_members_list
+from group_members import update_members_list, check_if_member_table_exists
 from pardon import pardon
 
 def check_all_commands( command, member ):
@@ -38,6 +38,10 @@ def pardon_member( member ):
     pardon( member )
 
 def is_member_admin( member ):
+    # This should only be called if we haven't created a table yet. This allows anyone to create a command while no table exists.
+    # TODO The table check and creation could probably be exported to occur right when the bot starts up to prevent multiple calls
+    if( not check_if_member_table_exists() ):
+        return True
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + member + "';" )
