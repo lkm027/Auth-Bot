@@ -29,7 +29,7 @@ def get_db_connection():
 def pardon( member ):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + name_before + "';" )
+    cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + member + "';" )
     rows = cursor.fetchall()
     if( rows[0][0] != 0 ):
         remove_warning_from_member( member )
