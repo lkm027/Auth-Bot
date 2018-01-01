@@ -28,6 +28,7 @@ def get_db_connection():
 
 def update_members_list():
     if( not check_if_member_table_exists() ):
+        print( "Create table called" )
         create_members_table()
     members = get_members_list()
     update_table( members )
