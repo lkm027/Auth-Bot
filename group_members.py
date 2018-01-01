@@ -39,7 +39,7 @@ def update_members_list():
 def update_table( members ):
     conn = get_db_connection()
     cursor = conn.cursor()
-    for member in members():
+    for member in members:
         member_id = member["user_id"]
         member_name = member["nickname"]
         cursor.execute( "SELECT COUNT(*) FROM tb_members where user_id='" + member_id + "';" )
