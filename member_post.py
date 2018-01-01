@@ -7,7 +7,7 @@ from urllib import parse
 from send_message import send_groupme_message
 
 def check_if_member_is_admin( member_id ):
-    if( not check_if_member_table_exists() )
+    if( not check_if_member_table_exists() ):
         return
     conn = get_db_connection()
     cursor = conn.cursor()
