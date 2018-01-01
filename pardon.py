@@ -1,5 +1,3 @@
-import requests
-import json
 import os
 import psycopg2
 
@@ -32,7 +30,11 @@ def pardon( member ):
     cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + member + "';" )
     rows = cursor.fetchall()
     if( rows[0][0] != 0 ):
-        remove_warning_from_member( member )
+        cursor.execute( "SELECT * FROM tb_members where nickname='" + member + "';" )
+        rows = cursor.fetchall()
+        rows[0][3] = is_admin
+        if( is_admin ):
+            remove_warning_from_member( member )
     else:
         print( "The user before does not exist within the database." )
     cursor.close()
