@@ -109,6 +109,7 @@ def check_if_member_table_exists():
     rows = cursor.fetchall()
     cursor.close()
     conn.close()
+    print( rows[0] )
 
     if( not rows[0][0] ):
         print( "False" )
