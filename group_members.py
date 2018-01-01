@@ -111,6 +111,7 @@ def check_if_member_table_exists():
     conn.close()
 
     if( not rows[0][0] ):
+        print( "False" )
         return False
 
     return True
