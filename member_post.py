@@ -7,6 +7,8 @@ from urllib import parse
 from send_message import send_groupme_message
 
 def check_if_member_is_admin( member_id ):
+    if( not check_if_member_table_exists() )
+        return
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members WHERE user_id='" + member_id + "';" )
@@ -48,3 +50,19 @@ def get_db_connection():
     except Exception as e:
         print( "Could not establish a connection with the database." )
         print( e )
+
+def check_if_member_table_exists():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( """SELECT EXISTS (
+                        SELECT 1 FROM information_schema.tables
+                        WHERE table_schema = 'public'
+                        AND table_name = 'tb_members' );""" )
+    rows = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    if( not rows[0][0] ):
+        return False
+
+    return True
