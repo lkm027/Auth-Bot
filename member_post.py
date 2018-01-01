@@ -25,7 +25,7 @@ def add_warning_to_member( member_id, member_name ):
     warnings_count = rows[0][5] + 1
     cursor.execute( "UPDATE tb_members set warnings=" + str( warnings_count ) + " where user_id='" + member_id + "';" )
 
-    send_groupme_message( emoji.emojize( member_name + ", you will be kicked on your 3rd warning. Please do not post again.\n:police_car_light:Your current warning count: " + str( warnings_count ) + ":police_car_light:" ) )
+    send_groupme_message( emoji.emojize( member_name + ", you will be kicked on your 3rd warning. Please do not post again.\n:police_car_light::police_car_light: Your current warning count: " + str( warnings_count ) + " :police_car_light::police_car_light:" ) )
     conn.commit()
     cursor.close()
     conn.close()
