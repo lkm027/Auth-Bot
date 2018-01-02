@@ -2,7 +2,7 @@ import requests
 import json
 
 from send_message import send_groupme_message
-from db_connection import get_db_connection()
+from db_connection import get_db_connection
 
 def update_members_list():
     if( not check_if_member_table_exists() ):
