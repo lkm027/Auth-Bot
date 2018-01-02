@@ -7,8 +7,8 @@ from flask import Flask, request
 from commands import check_all_commands
 from change_name import change_name_if_it_exists
 from member_post import add_warning_to_member
-import db.db_requests
 from group_members import update_members_list
+import db.db_requests as db_requests
 
 app = Flask(__name__)
 

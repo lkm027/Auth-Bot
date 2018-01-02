@@ -1,7 +1,7 @@
 import emoji
 
 from send_message import send_groupme_message
-import db.db_requests
+import db.db_requests as db_requests
 
 def add_warning_to_member( member_id, member_name ):
     db_requests.add_new_warning_to_member( member_id )

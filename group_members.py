@@ -3,7 +3,7 @@ import json
 import os
 
 from send_message import send_groupme_message
-import db.db_requests
+import db.db_requests as db_requests
 
 def update_members_list():
     members = get_members_list()

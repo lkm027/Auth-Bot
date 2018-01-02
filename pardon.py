@@ -1,5 +1,5 @@
 from send_message import send_groupme_message
-import db.db_requests
+import db.db_requests as db_requests
 
 def pardon( member_name ):
     if( db_requests.check_if_member_exists_by_name( member_name ) ):
