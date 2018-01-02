@@ -19,6 +19,7 @@ def webhook():
     if( not db_requests.check_if_member_table_exists() ):
         db_requests.create_members_table()
         update_members_list()
+    # If there are no members in our table, update and retrieve all members in the current group
     elif( not db_requests.members_are_in_db() ):
         update_members_list()
 

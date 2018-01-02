@@ -32,6 +32,7 @@ def change_member_name( name_before, name_after ):
     conn.commit()
     conn.close()
 
+# Check if the given member is an admin within the group
 def is_member_admin( member_id ):
     conn = db_conn.get_db_connection()
     cursor = conn.cursor()
@@ -91,6 +92,7 @@ def members_are_in_db():
         return True
     return False
 
+# Add another member entry into our db
 def save_member_to_db( member_name, member_id ):
     conn = db_conn.get_db_connection()
     cursor = conn.cursor()
@@ -146,6 +148,7 @@ def get_warnings_count_by_name( member_name ):
     conn.close()
     return warnings_count
 
+# Delete all members from our members table
 def drop_all_members():
     conn = db_conn.get_db_connection()
     cursor = conn.cursor()

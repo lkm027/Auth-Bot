@@ -31,7 +31,8 @@ def check_all_commands( command, member ):
 def update_members():
     update_members_list()
 
-# Drops all members in our table
+# Drops all members in our table.
+# All current members in the group will then be readded immediatelly following.
 def drop_all_members():
     drop_members.drop_all_members()
 
