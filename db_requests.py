@@ -91,7 +91,7 @@ def save_member_to_db( member_name, member_id ):
     cursor.close()
     conn.close()
 
-def add_warning_to_member( member_id ):
+def add_new_warning_to_member( member_id ):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members WHERE user_id='" + member_id + "';" )
