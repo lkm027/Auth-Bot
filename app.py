@@ -9,7 +9,7 @@ from change_name import change_name_if_it_exists
 from member_post import add_warning_to_member
 from db_requests import check_if_member_table_exists, create_members_table, is_member_admin
 from group_members import update_members_list
-#
+
 app = Flask(__name__)
 
 @app.route( '/', methods=['POST'] )
