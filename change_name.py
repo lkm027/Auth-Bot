@@ -1,23 +1,8 @@
 import os
 
 from db_connection import get_db_connection
+from db_requests import check_if_member_exists_by_name, change_member_name
 
-def change_name( name_before, name_after ):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + name_before + "';" )
-    rows = cursor.fetchall()
-    if( rows[0][0] != 0 ):
-        change_db_name_entry( name_before, name_after )
-    else:
-        print( "The user before does not exist within the database." )
-    cursor.close()
-    conn.close()
-
-def change_db_name_entry( name_before, name_after ):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute( "UPDATE tb_members set nickname='" + name_after + "' WHERE nickname='" + name_before + "';" )
-    cursor.close()
-    conn.commit()
-    conn.close()
+def change_name_if_it_exists( name_before, name_after ):
+    if( check_if_member_exists_by_name( name_before ):
+        change_member_name( name_before, name_after )
