@@ -5,7 +5,7 @@ import psycopg2
 from flask import Flask, request
 
 from commands import check_all_commands
-from change_name import change_name
+from change_name import change_name_if_it_exists
 from member_post import check_if_member_is_admin, add_warning_to_member
 
 app = Flask(__name__)
@@ -39,6 +39,6 @@ def webhook():
             to_index = changed_index + 3
             name_before_change = " ".join( words[:changed_index] )
             name_after_change  = " ".join( words[to_index:] )
-            change_name( name_before_change, name_after_change )
+            change_name_if_it_exists( name_before_change, name_after_change )
 
     return "ok", 200
