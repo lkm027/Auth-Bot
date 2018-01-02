@@ -1,3 +1,5 @@
+import os
+
 from db_connection import get_db_connection
 
 def check_if_member_exists_by_name( member_name ):
