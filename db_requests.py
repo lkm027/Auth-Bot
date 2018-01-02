@@ -12,6 +12,15 @@ def check_if_member_exists_by_name( member_name ):
     cursor.close()
     conn.close()
 
+def check_if_member_exists_by_id( member_id ):
+    member_name = member["nickname"]
+    cursor.execute( "SELECT COUNT(*) FROM tb_members where user_id='" + member_id + "';" )
+    rows = cursor.fetchall()
+    count = rows[0][0]
+    if( count != 0 ):
+        return True
+    return False
+
 def change_member_name( name_before, name_after ):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -38,5 +47,47 @@ def is_member_admin( member ):
         return False
     else:
         print( "The user before does not exist within the database." )
+    cursor.close()
+    conn.close()
+
+def create_members_table():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( """CREATE TABLE tb_members
+                        ( id SERIAL PRIMARY KEY,
+                          nickname TEXT,
+                          user_id VARCHAR(80),
+                          is_admin BOOLEAN,
+                          kicked DATE,
+                          warnings INTEGER );""" )
+
+    cursor.close()
+    conn.commit()
+    conn.close()
+
+def check_if_member_table_exists():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( """SELECT EXISTS (
+                        SELECT 1 FROM information_schema.tables
+                        WHERE table_schema = 'public'
+                        AND table_name = 'tb_members' );""" )
+    rows = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    if( not rows[0][0] ):
+        return False
+
+    return True
+
+def save_member_to_db( member_name, member_id ):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    if( os.getenv( "OWNER" ) == member['nickname'] ):
+        cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member['nickname'] + "'" + ", " + member['user_id'] + ", True, NULL, 0 );" )
+    else:
+        cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member['nickname'] + "'" + ", " + member['user_id'] + ", False, NULL, 0 );" )
+    conn.commit()
     cursor.close()
     conn.close()
