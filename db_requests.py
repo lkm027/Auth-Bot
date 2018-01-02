@@ -115,3 +115,23 @@ def remove_warning_from_member( member_name ):
     conn.commit()
     cursor.close()
     conn.close()
+
+def get_warnings_count_by_id( member_id ):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "SELECT * FROM tb_members WHERE user_id='" + member_id + "';" )
+    rows = cursor.fetchall()
+    warnings_count = rows[0][5]
+    cursor.close()
+    conn.close()
+    return warnings_count
+
+def get_warnings_count_by_name( member_name ):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "SELECT * FROM tb_members WHERE nickname='" + member_name + "';" )
+    rows = cursor.fetchall()
+    warnings_count = rows[0][5]
+    cursor.close()
+    conn.close()
+    return warnings_count
