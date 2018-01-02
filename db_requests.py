@@ -13,6 +13,8 @@ def check_if_member_exists_by_name( member_name ):
     conn.close()
 
 def check_if_member_exists_by_id( member_id ):
+    conn = get_db_connection()
+    cursor = conn.cursor()
     cursor.execute( "SELECT COUNT(*) FROM tb_members where user_id='" + member_id + "';" )
     rows = cursor.fetchall()
     count = rows[0][0]
