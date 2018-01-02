@@ -4,7 +4,7 @@ import os
 
 from send_message import send_groupme_message
 from db_connection import get_db_connection
-from db_requests import check_if_member_exists_by_id, save_member_to_db
+from db_requests import check_if_member_exists_by_id, save_member_to_db, check_if_member_table_exists
 
 def update_members_list():
     if( not check_if_member_table_exists() ):
