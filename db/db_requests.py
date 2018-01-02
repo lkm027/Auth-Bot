@@ -134,3 +134,11 @@ def get_warnings_count_by_name( member_name ):
     cursor.close()
     conn.close()
     return warnings_count
+
+def drop_all_members():
+    conn = db_conn.get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "DELETE FROM tb_members;" )
+    conn.commit()
+    cursor.close()
+    conn.close()
