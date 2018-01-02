@@ -3,7 +3,7 @@ from db_connection import get_db_connection
 def check_if_member_exists_by_name( member_name ):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + name_before + "';" )
+    cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + member_name + "';" )
     rows = cursor.fetchall()
     if( rows[0][0] != 0 ):
         return True
