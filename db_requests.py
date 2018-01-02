@@ -37,7 +37,6 @@ def is_member_admin( member_id ):
     cursor = conn.cursor()
     cursor.execute( "SELECT COUNT(*) FROM tb_members where user_id='" + member_id + "';" )
     rows = cursor.fetchall()
-    print( rows[0][0] )
     if( rows[0][0] != 0 ):
         cursor.execute( "SELECT * FROM tb_members where user_id='" + member_id + "';" )
         rows = cursor.fetchall()
