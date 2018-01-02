@@ -7,11 +7,18 @@ from flask import Flask, request
 from commands import check_all_commands
 from change_name import change_name_if_it_exists
 from member_post import check_if_member_is_admin, add_warning_to_member
+from db_request import check_if_member_table_exists, create_members_table
 
 app = Flask(__name__)
 
 @app.route( '/', methods=['POST'] )
 def webhook():
+
+    # We should first check if our table exists before doing anything
+    if( not check_if_member_table_exists() ):
+        create_members_table()
+
+
     data = request.get_json()
 
     # We don't want to reply do ourselves!
