@@ -17,8 +17,6 @@ def update_members_list():
     return True
 
 def update_table( members ):
-    conn = get_db_connection()
-    cursor = conn.cursor()
     for member in members:
         member_id = member["user_id"]
         member_name = member["nickname"]
