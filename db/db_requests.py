@@ -80,6 +80,17 @@ def check_if_member_table_exists():
 
     return True
 
+# Check if there exist any members in our table
+def members_are_in_db():
+    conn = db_conn.get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "SELECT COUNT(*) FROM tb_members;" )
+    rows = cursor.fetchall()
+    count = rows[0][0]
+    if( count != 0 ):
+        return True
+    return False
+
 def save_member_to_db( member_name, member_id ):
     conn = db_conn.get_db_connection()
     cursor = conn.cursor()

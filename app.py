@@ -19,6 +19,8 @@ def webhook():
     if( not db_requests.check_if_member_table_exists() ):
         db_requests.create_members_table()
         update_members_list()
+    elif( not db_requests.members_are_in_db() ):
+        update_members_list()
 
     data = request.get_json()
 
