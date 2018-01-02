@@ -1,9 +1,6 @@
-import os
-import psycopg2
 import emoji
 
-from urllib import parse
-
+from db_connection import get_db_connection
 from send_message import send_groupme_message
 from group_members import update_members_list, check_if_member_table_exists
 from pardon import pardon
@@ -57,22 +54,3 @@ def is_member_admin( member ):
         print( "The user before does not exist within the database." )
     cursor.close()
     conn.close()
-
-def get_db_connection():
-    try:
-        parse.uses_netloc.append("postgres")
-        url = parse.urlparse(os.environ["DATABASE_URL"])
-
-        conn = psycopg2.connect(
-            database=url.path[1:],
-            user=url.username,
-            password=url.password,
-            host=url.hostname,
-            port=url.port
-        )
-
-        return conn
-
-    except Exception as e:
-        print( "Could not establish a connection with the database." )
-        print( e )
