@@ -24,7 +24,6 @@ def webhook():
 
     # We don't want to reply do ourselves!
     if( data['name'] != os.getenv( "BOT_NAME" ) and not data["name"] == "GroupMe" ):
-        print( "Whooooooooooops" )
 
         # Add warning to user if they are not an admin
         if( not check_if_member_is_admin( data['user_id'] ) ):
