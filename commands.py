@@ -1,7 +1,7 @@
 import emoji
 
 from send_message import send_groupme_message
-from group_members import update_members_list, check_if_member_table_exists
+from group_members import update_members_list
 from pardon import pardon
 from db_requests import is_member_admin
 
