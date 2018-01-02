@@ -7,7 +7,7 @@ from flask import Flask, request
 from commands import check_all_commands
 from change_name import change_name_if_it_exists
 from member_post import check_if_member_is_admin, add_warning_to_member
-from db_request import check_if_member_table_exists, create_members_table
+from db_requests import check_if_member_table_exists, create_members_table
 
 app = Flask(__name__)
 
