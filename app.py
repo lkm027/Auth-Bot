@@ -7,7 +7,7 @@ from flask import Flask, request
 from commands import check_all_commands
 from change_name import change_name_if_it_exists
 from member_post import add_warning_to_member
-from db_requests import check_if_member_table_exists, create_members_table, check_if_member_is_admin
+from db_requests import check_if_member_table_exists, create_members_table, is_member_admin
 from group_members import update_members_list
 
 app = Flask(__name__)
@@ -26,7 +26,7 @@ def webhook():
     if( data['name'] != os.getenv( "BOT_NAME" ) and not data["name"] == "GroupMe" ):
 
         # Add warning to user if they are not an admin
-        if( not check_if_member_is_admin( data['user_id'] ) ):
+        if( not is_member_admin( data['user_id'] ) ):
             add_warning_to_member( data['user_id'], data['name'] )
 
         words = str.split( data["text"] )
