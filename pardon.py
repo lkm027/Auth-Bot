@@ -1,4 +1,3 @@
-from db_connection import get_db_connection
 from send_message import send_groupme_message
 from db_requests import check_if_member_exists_by_name, remove_warning_from_member, get_warnings_count_by_name
 
