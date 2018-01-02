@@ -28,6 +28,7 @@ def webhook():
         # Add warning to user if they are not an admin
         if( not is_member_admin( data['user_id'] ) ):
             add_warning_to_member( data['user_id'], data['name'] )
+            return
 
         words = str.split( data["text"] )
         if( words[0].lower() == "@auth" and words[1].lower() == "bot" ):

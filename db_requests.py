@@ -46,7 +46,7 @@ def is_member_admin( member_id ):
             return True
         return False
     else:
-        print( "This user is in the database." )
+        print( "Request user was not within the database" )
     cursor.close()
     conn.close()
 
