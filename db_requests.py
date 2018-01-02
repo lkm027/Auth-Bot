@@ -37,6 +37,7 @@ def is_member_admin( member_id ):
     cursor = conn.cursor()
     cursor.execute( "SELECT COUNT(*) FROM tb_members where user_id='" + member_id + "';" )
     rows = cursor.fetchall()
+    print( rows[0][0] )
     if( rows[0][0] != 0 ):
         cursor.execute( "SELECT * FROM tb_members where user_id='" + member_id + "';" )
         rows = cursor.fetchall()
@@ -45,7 +46,7 @@ def is_member_admin( member_id ):
             return True
         return False
     else:
-        print( "The user before does not exist within the database." )
+        print( "This user is in the database." )
     cursor.close()
     conn.close()
 
