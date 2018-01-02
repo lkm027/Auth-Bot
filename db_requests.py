@@ -32,17 +32,13 @@ def change_member_name( name_before, name_after ):
     conn.commit()
     conn.close()
 
-def is_member_admin( member ):
-    # This should only be called if we haven't created a table yet. This allows anyone to create a command while no table exists.
-    # TODO The table check and creation could probably be exported to occur right when the bot starts up to prevent multiple calls
-    if( not check_if_member_table_exists() ):
-        return True
+def is_member_admin( member_id ):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute( "SELECT COUNT(*) FROM tb_members where nickname='" + member + "';" )
+    cursor.execute( "SELECT COUNT(*) FROM tb_members where user_id='" + member_id + "';" )
     rows = cursor.fetchall()
     if( rows[0][0] != 0 ):
-        cursor.execute( "SELECT * FROM tb_members where nickname='" + member + "';" )
+        cursor.execute( "SELECT * FROM tb_members where user_id='" + member_id + "';" )
         rows = cursor.fetchall()
         is_admin = rows[0][3]
         if( is_admin ):
@@ -91,6 +87,30 @@ def save_member_to_db( member_name, member_id ):
         cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member_name + "'" + ", " + member_id + ", True, NULL, 0 );" )
     else:
         cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member_name + "'" + ", " + member_id + ", False, NULL, 0 );" )
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def add_warning_to_member( member_id ):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "SELECT * FROM tb_members WHERE user_id='" + member_id + "';" )
+    rows = cursor.fetchall()
+    warnings_count = rows[0][5] + 1
+    cursor.execute( "UPDATE tb_members set warnings=" + str( warnings_count ) + " where user_id='" + member_id + "';" )
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def remove_warning_from_member( member_name ):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "SELECT * FROM tb_members WHERE nickname='" + member_name + "';" )
+    rows = cursor.fetchall()
+    warnings_count = rows[0][5] - 1
+    cursor.execute( "UPDATE tb_members set warnings=" + str( warnings_count ) + " where nickname='" + member_name + "';" )
+
     conn.commit()
     cursor.close()
     conn.close()
