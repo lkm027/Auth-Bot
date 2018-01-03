@@ -156,3 +156,11 @@ def drop_all_members():
     conn.commit()
     cursor.close()
     conn.close()
+
+def make_member_admin( member_name ):
+    conn = db_conn.get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "UPDATE tb_members set is_admin=True WHERE nickname='" + member_name + "';" )
+    conn.commit()
+    cursor.close()
+    conn.close()
