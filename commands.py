@@ -8,10 +8,12 @@ import make_admin as make_admin
 
 def check_all_commands( command, member ):
     # Remove the auth bot call from our command
+    print( command )
     words = str.split( command )
     words.pop( 0 )
     words.pop( 0 )
     command = " ".join( words )
+    print( command )
 
     # command = command.lower()
 
@@ -48,10 +50,9 @@ def promote( member ):
 
 # Assumption is that there is only one word before the name and none after
 def get_command_name( command ):
-    print( command )
     words = str.split( command )
     words.pop(0)
     words[0] = words[0][1:]
     member = " ".join( words )
-    print( member )
+    print( command )
     return member
