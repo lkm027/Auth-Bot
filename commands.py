@@ -48,7 +48,10 @@ def promote( member ):
 
 # Assumption is that there is only one word before the name and none after
 def get_command_name( command ):
+    print( command )
     words = str.split( command )
     words.pop(0)
+    words[0] = words[0][1:]
     member = " ".join( words )
+    print( member )
     return member
