@@ -4,7 +4,7 @@ import os
 
 from send_message import send_groupme_message
 
-from apscheduler.scheduler.blocking import BlockingScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 def hello():
     send_groupme_message( "Hello from the scheduler" )
