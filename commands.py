@@ -50,9 +50,16 @@ def promote( member ):
 
 # Assumption is that there is only one word before the name and none after
 def get_command_name( command ):
-    pos = command.find( "@" ) + 1
-    command = command[pos:]
-    print( command )
-    words = str.split( command )
-    member = " ".join( words )
+    pos = command.find( "@" )
+    # if the user is not specified with @
+    if( pos == -1 ):
+        words = str.split( command )
+        words.pop( 0 )
+        member = " ".join( words )
+    else:
+        pos = pos + 1
+        command = command[pos:]
+        print( command )
+        words = str.split( command )
+        member = " ".join( words )
     return member
