@@ -28,7 +28,7 @@ def webhook():
     # We don't want to reply do ourselves!
     if( data['name'] != os.getenv( "BOT_NAME" ) and not data["name"] == "GroupMe" ):
         # If the user does not exist, add them to our db
-        if( not db_requests.check_if_member_exists_by_id( data["user_id"] ):
+        if( not db_requests.check_if_member_exists_by_id( data["user_id"] ) ):
                 db_requests.save_member_to_db( data["name"], data["user_id"] )
 
         # Add warning to user if they are not an admin
