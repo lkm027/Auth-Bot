@@ -158,9 +158,12 @@ def drop_all_members():
     conn.close()
 
 def make_member_admin( member_name ):
+    if( check_if_member_exists_by_name( member_name ) ):
+        return False
     conn = db_conn.get_db_connection()
     cursor = conn.cursor()
     cursor.execute( "UPDATE tb_members set is_admin=True WHERE nickname='" + member_name + "';" )
     conn.commit()
     cursor.close()
     conn.close()
+    return True
