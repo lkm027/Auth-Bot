@@ -38,7 +38,6 @@ def webhook():
 
         words = str.split( data["text"] )
         if( words[0].lower() == "@auth" and words[1].lower() == "bot" ):
-            print( data["text"] )
             check_all_commands( data["text"], data["name"] )
     # While this operation is currently not necesarry, I am going to keep it for now. It can, however be sped up and optimized
     # TODO Optimize this method to not worry about the user's original name. All we really need is their user_id and the name they change to.
