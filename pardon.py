@@ -15,7 +15,7 @@ def pardon( member_name ):
         # send_groupme_message( "Congrats " + member_name + "! You have been pardon by the almighty overlords. Your current warning count: " + str( warnings_count ) + "." )
 
 def add_member_back_to_group( member_name ):
-    member_id = get_member_user_id( member_id )
+    member_id = db_requests.get_member_user_id( member_id )
     headers = {
             "X-Access-Token" : os.getenv( "USER_ID" ),
             "Content-type"   : "application/json"
