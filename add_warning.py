@@ -15,7 +15,8 @@ def add_warning_to_member( member_id, member_name ):
     if( warnings_count == KICK_WARNING ):
         kick_member( member_id )
 
-def kick_member( member_id ):
+def kick_member( user_id ):
+    member_id = db_requests.get_member_member_id( user_id )
     headers = {
             "X-Access-Token" : os.getenv( "USER_ID" ),
             "Content-type"   : "application/json"

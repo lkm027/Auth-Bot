@@ -41,7 +41,7 @@ def is_member_admin( member_id ):
     if( rows[0][0] != 0 ):
         cursor.execute( "SELECT * FROM tb_members where user_id='" + member_id + "';" )
         rows = cursor.fetchall()
-        is_admin = rows[0][3]
+        is_admin = rows[0][4]
         if( is_admin ):
             return True
         return False
@@ -110,7 +110,7 @@ def add_new_warning_to_member( member_id ):
     cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members WHERE user_id='" + member_id + "';" )
     rows = cursor.fetchall()
-    warnings_count = rows[0][5] + 1
+    warnings_count = rows[0][6] + 1
     cursor.execute( "UPDATE tb_members set warnings=" + str( warnings_count ) + " where user_id='" + member_id + "';" )
 
     conn.commit()
@@ -122,7 +122,7 @@ def remove_warning_from_member( member_name ):
     cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members WHERE nickname='" + member_name + "';" )
     rows = cursor.fetchall()
-    warnings_count = rows[0][5] - 1
+    warnings_count = rows[0][6] - 1
     cursor.execute( "UPDATE tb_members set warnings=" + str( warnings_count ) + " where nickname='" + member_name + "';" )
 
     conn.commit()
@@ -134,7 +134,7 @@ def get_warnings_count_by_id( member_id ):
     cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members WHERE user_id='" + member_id + "';" )
     rows = cursor.fetchall()
-    warnings_count = rows[0][5]
+    warnings_count = rows[0][6]
     cursor.close()
     conn.close()
     return warnings_count
@@ -144,7 +144,7 @@ def get_warnings_count_by_name( member_name ):
     cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members WHERE nickname='" + member_name + "';" )
     rows = cursor.fetchall()
-    warnings_count = rows[0][5]
+    warnings_count = rows[0][6]
     cursor.close()
     conn.close()
     return warnings_count
@@ -176,3 +176,12 @@ def get_member_user_id( member_name ):
     rows = cursor.fetchall()
     user_id = rows[0][2]
     return user_id
+
+def get_member_member_id( user_id ):
+    conn = db_conn.get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "SELECT * FROM tb_members where user_id='" + user_id + "';" )
+    rows = cursor.fetchall()
+    member_id = rows[0][3]
+    return member_id
+
