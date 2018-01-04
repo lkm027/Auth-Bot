@@ -167,3 +167,11 @@ def make_member_admin( member_name ):
     cursor.close()
     conn.close()
     return True
+
+def get_member_user_id( member_name ):
+    conn = db_conn.get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "SELECT * FROM tb_members where nickname='" + member_name + "';" )
+    rows = cursor.fetchall()
+    user_id = rows[0][2]
+    return user_id
