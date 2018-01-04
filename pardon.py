@@ -39,5 +39,5 @@ def add_member_back_to_group( member_name ):
 
     r = requests.get( url, data = json.dumps( data ), headers = headers )
 
-    # response = r.json()
-    # members = response['response']['members']
+    print( response = r.json() )
+    print( response['response'] )
