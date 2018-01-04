@@ -57,6 +57,7 @@ def create_members_table():
                         ( id SERIAL PRIMARY KEY,
                           nickname TEXT,
                           user_id VARCHAR(80),
+                          member_id VARCHAR(80),
                           is_admin BOOLEAN,
                           kicked DATE,
                           warnings INTEGER );""" )
@@ -93,13 +94,13 @@ def members_are_in_db():
     return False
 
 # Add another member entry into our db
-def save_member_to_db( member_name, member_id ):
+def save_member_to_db( member_name, user_id, member_id ):
     conn = db_conn.get_db_connection()
     cursor = conn.cursor()
     if( os.getenv( "OWNER" ) == member_name ):
-        cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member_name + "'" + ", " + member_id + ", True, NULL, 0 );" )
+        cursor.execute( "INSERT INTO tb_members( nickname, user_id, member_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member_name + "'" + ", " + user_id + ", " + member_id + ", True, NULL, 0 );" )
     else:
-        cursor.execute( "INSERT INTO tb_members( nickname, user_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member_name + "'" + ", " + member_id + ", False, NULL, 0 );" )
+        cursor.execute( "INSERT INTO tb_members( nickname, user_id, member_id, is_admin, kicked, warnings ) VALUES ( " + "'" + member_name + "'" + ", " + user_id + ", " + member_id + ", False, NULL, 0 );" )
     conn.commit()
     cursor.close()
     conn.close()

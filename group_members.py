@@ -17,9 +17,10 @@ def update_table( members ):
     for member in members:
         member_id = member["user_id"]
         member_name = member["nickname"]
+        member_membership_id = member["id"]
         if( not db_requests.check_if_member_exists_by_id( member_id ) ):
             # When the first update is called we want to automatically make the owner an admin
-            db_requests.save_member_to_db( member_name, member_id )
+            db_requests.save_member_to_db( member_name, member_id, member_membership_id )
     send_groupme_message( "Members successfully updated." )
 
 def get_members_list():
