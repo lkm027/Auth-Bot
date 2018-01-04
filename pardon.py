@@ -37,7 +37,7 @@ def add_member_back_to_group( member_name ):
                 ]
             }
 
-    r = requests.get( url, data = json.dumps( data ), headers = headers )
+    r = requests.get( url, data , headers = headers )
 
     response = r.json()
     print( response['response']["status"] )
