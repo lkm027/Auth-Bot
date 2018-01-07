@@ -3,7 +3,8 @@ import requests
 import json
 import os
 
-from datetime import *
+from datetime import date as date
+from datetime import timedelta as timedelta
 
 from send_message import send_groupme_message
 import db.db_requests as db_requests
