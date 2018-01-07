@@ -204,6 +204,7 @@ def get_kicked_members( current_date ):
         kicked_names.append( member[1] )
     cursor.close()
     conn.close()
+    return kicked_names
 
 def remove_member_kick_date( member_name ):
     conn = db_conn.get_db_connection()
