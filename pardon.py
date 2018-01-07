@@ -4,6 +4,7 @@ import os
 
 from send_message import send_groupme_message
 import db.db_requests as db_requests
+from urllib.request import Request, urlopen
 
 PARDON_NUMBER = 2
 
@@ -20,6 +21,7 @@ def pardon( member_name ):
 
 def add_member_back_to_group( member_name ):
     member_id = db_requests.get_member_user_id( member_name )
+    print( member_id )
     headers = {
             "X-Access-Token" : os.getenv( "USER_ID" ),
             "Content-type"   : "application/json"
@@ -38,3 +40,5 @@ def add_member_back_to_group( member_name ):
             }
 
     requests.post( url, data = json.dumps( data ) , headers = headers )
+    json = urlopen( request ).read().decode()
+    print( json )
