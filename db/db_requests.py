@@ -197,9 +197,10 @@ def set_kick_date_for_member( user_id, date ):
 def get_kicked_members( current_date ):
     conn = db_conn.get_db_connection()
     cursor = conn.cursor()
-    cursor.excute( "SELECT * FROM tb_members where kicked <= '" + current_date + "';" )
+    cursor.execute( "SELECT * FROM tb_members where kicked <= '" + current_date + "';" )
     kicked_users = cursor.fetchall()
     kicked_names = null
+    print( "Printing names" )
     for member in kicked_users:
         kicked_names.append( member[1] )
     cursor.close()
