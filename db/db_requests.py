@@ -190,3 +190,6 @@ def set_kick_date_for_member( user_id, date ):
     conn = db_conn.get_db_connection()
     cursor = conn.cursor()
     cursor.execute( "UPDATE tb_members set kicked='" + date + "' where user_id='" + user_id + "';" )
+    conn.commit()
+    cursor.close()
+    conn.close()

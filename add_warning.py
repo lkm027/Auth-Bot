@@ -34,7 +34,7 @@ def kick_member_by_name( member_name ):
     user_id = db_requests.get_member_user_id( member_name )
     return_date = get_kick_date()
     db_requests.set_kick_date_for_member( user_id, return_date )
-    db_requests.kick_member_by_user_id( user_id )
+    kick_member_by_user_id( user_id )
 
 def get_kick_date():
     current_date  = date.today()
