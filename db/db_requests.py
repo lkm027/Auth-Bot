@@ -210,7 +210,7 @@ def remove_member_kick_date( member_name ):
     conn = db_conn.get_db_connection()
     cursor = conn.cursor()
     cursor.execute( "UPDATE tb_members set kicked=NULL where nickname='" + member_name + "';" )
-    cursor.execute( "UPDATE tb_members set warnings=1 where nickname='" + member_name _ "';" )
+    cursor.execute( "UPDATE tb_members set warnings=1 where nickname='" + member_name + "';" )
     conn.commit()
     cursor.close()
     conn.close()
