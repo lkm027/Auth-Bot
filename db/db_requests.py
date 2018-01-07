@@ -200,9 +200,15 @@ def get_kicked_members( current_date ):
     cursor.execute( "SELECT * FROM tb_members where kicked <= '" + current_date + "';" )
     kicked_users = cursor.fetchall()
     kicked_names = []
-    print( "Printing names" )
     for member in kicked_users:
         kicked_names.append( member[1] )
     cursor.close()
     conn.close()
-    print( kicked_names )
+
+def remove_member_kick_date( member_name ):
+    conn = db_conn.get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute( "UPDATE tb_members set kicked=NULL where nickname='" + member_name + "';" )
+    conn.commit()
+    cursor.close()
+    conn.close()
