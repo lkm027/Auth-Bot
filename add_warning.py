@@ -16,7 +16,7 @@ def add_warning_to_member( member_id, member_name ):
     warnings_count = db_requests.get_warnings_count_by_id( member_id )
     send_groupme_message( emoji.emojize( member_name + ", you will be kicked on your 3rd warning. Please do not post again.\n:police_car_light: Your warning count: " + str( warnings_count ) + " :police_car_light:" ) )
     if( warnings_count == KICK_WARNING ):
-        kick_member_by_user_id( member_id )
+        db_requests.kick_member_by_user_id( member_id )
 
 def kick_member_by_user_id( user_id ):
     member_id = db_requests.get_member_member_id( user_id )
@@ -33,8 +33,8 @@ def kick_member_by_user_id( user_id ):
 def kick_member_by_name( member_name ):
     user_id = db_requests.get_member_user_id( member_name )
     return_date = get_kick_date()
-    set_kick_date_for_member( user_id, return_date )
-    kick_member_by_user_id( user_id )
+    db_requests.set_kick_date_for_member( user_id, return_date )
+    db_requests.kick_member_by_user_id( user_id )
 
 def get_kick_date():
     current_date  = date.today()
