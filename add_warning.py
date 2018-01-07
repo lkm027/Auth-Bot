@@ -3,10 +3,13 @@ import requests
 import json
 import os
 
+from datetime import *
+
 from send_message import send_groupme_message
 import db.db_requests as db_requests
 
 KICK_WARNING = 3
+LENGTH_OF_KICK = 3
 
 def add_warning_to_member( member_id, member_name ):
     db_requests.add_new_warning_to_member( member_id )
@@ -29,4 +32,13 @@ def kick_member_by_user_id( user_id ):
 
 def kick_member_by_name( member_name ):
     user_id = db_requests.get_member_user_id( member_name )
+    return_date = get_kick_date()
+    set_kick_date_for_member( user_id, return_date )
     kick_member_by_user_id( user_id )
+
+def get_kick_date():
+    current_date  = date.today()
+    return_date = current_date()
+    # kick_duration = timedelta( days = LENGTH_OF_KICK )
+    # return_date   = current_date + kick_duration
+    return return_date
