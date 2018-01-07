@@ -9,9 +9,8 @@ def get_list_of_kicked_users():
     kicked_members = db_requests.get_kicked_members( current_date )
     if( len( kicked_members ) > 0 ):
         for member in kicked_members:
-            add_member_back_to_group( member )
+            add_member_back( member )
 
 def add_member_back( member_name ):
     add_member_back_to_group( member_name )
     db_requests.remove_member_kick_date( member_name )
-

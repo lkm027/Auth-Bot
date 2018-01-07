@@ -40,5 +40,3 @@ def add_member_back_to_group( member_name ):
             }
 
     requests.post( url, data = json.dumps( data ) , headers = headers )
-    json = urlopen( request ).read().decode()
-    print( json )
