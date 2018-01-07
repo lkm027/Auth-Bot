@@ -2,18 +2,17 @@ import emoji
 
 from send_message import send_groupme_message
 from group_members import update_members_list
+from add_warning import kick_member_by_name
 from pardon import pardon
 import drop_members as drop_members
 import make_admin as make_admin
 
 def check_all_commands( command, member ):
     # Remove the auth bot call from our command
-    print( command )
     words = str.split( command )
     words.pop( 0 )
     words.pop( 0 )
     command = " ".join( words )
-    print( command )
 
     # command = command.lower()
 
@@ -28,6 +27,9 @@ def check_all_commands( command, member ):
     elif( "promote" in command ):
         member = get_command_name( command )
         promote( member )
+    elif( "kick" in command ):
+        member = get_command_name( command )
+        kick_member( member )
     else:
         send_groupme_message( "That command does not exist" )
 
@@ -47,6 +49,9 @@ def pardon_member( member ):
 # promote user to be an admin
 def promote( member ):
     make_admin.make_admin( member )
+
+def kick_member( member ):
+    kick_member_by_name( member )
 
 # Assumption is that there is only one word before the name and none after
 def get_command_name( command ):
