@@ -199,7 +199,7 @@ def get_kicked_members( current_date ):
     cursor = conn.cursor()
     cursor.execute( "SELECT * FROM tb_members where kicked <= '" + current_date + "';" )
     kicked_users = cursor.fetchall()
-    kicked_names = None
+    kicked_names = []
     print( "Printing names" )
     for member in kicked_users:
         kicked_names.append( member[1] )
