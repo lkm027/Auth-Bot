@@ -3,7 +3,7 @@ import requests
 import json
 import os
 
-from datetime import date as date
+import datetime
 
 from send_message import send_groupme_message
 import db.db_requests as db_requests
@@ -37,7 +37,7 @@ def kick_member_by_name( member_name ):
     kick_member_by_user_id( user_id )
 
 def get_kick_date():
-    current_date  = date.today()
+    current_date  = datetime.date.today()
     return_date = current_date()
     # kick_duration = timedelta( days = LENGTH_OF_KICK )
     # return_date   = current_date + kick_duration
