@@ -30,6 +30,7 @@ def kick_member_by_user_id( user_id ):
 
     group_id = os.getenv( "GROUPME_GROUP_ID" )
     url      = "https://api.groupme.com/v3/groups/" + group_id + "/members/" + member_id + "/remove"
+    print( url )
 
     r = requests.post( url, data = json.dumps( {} ) , headers = headers )
     response = r.json()
