@@ -42,7 +42,7 @@ def kick_member_by_name( member_name ):
 
 def get_kick_date():
     current_date  = date.today()
-    return_date = str( current_date )
     kick_duration = timedelta( days = LENGTH_OF_KICK )
     return_date   = current_date + kick_duration
+    return_date   = str( return_date )
     return return_date
