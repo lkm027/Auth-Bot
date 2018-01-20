@@ -7,6 +7,7 @@ from pardon import add_member_back_to_group
 def get_list_of_kicked_users():
     current_date = str( date.today() )
     kicked_members = db_requests.get_kicked_members( current_date )
+    print( kicked_members )
     if( len( kicked_members ) > 0 ):
         for member in kicked_members:
             add_member_back( member )
