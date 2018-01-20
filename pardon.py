@@ -21,7 +21,6 @@ def pardon( member_name ):
 
 def add_member_back_to_group( member_name ):
     member_id = db_requests.get_member_user_id( member_name )
-    print( member_id )
     headers = {
             "X-Access-Token" : os.getenv( "USER_ID" ),
             "Content-type"   : "application/json"

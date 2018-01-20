@@ -64,7 +64,6 @@ def get_command_name( command ):
     else:
         pos = pos + 1
         command = command[pos:]
-        print( command )
         words = str.split( command )
         member = " ".join( words )
     return member

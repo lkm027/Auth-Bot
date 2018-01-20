@@ -32,7 +32,6 @@ def kick_member_by_user_id( user_id ):
 
     r = requests.post( url, data = json.dumps( {} ) , headers = headers )
     response = r.json()
-    print( response )
 
 def kick_member_by_name( member_name ):
     user_id = db_requests.get_member_user_id( member_name )
