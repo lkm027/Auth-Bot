@@ -15,3 +15,6 @@ def get_list_of_kicked_users():
 def add_member_back( member_name ):
     add_member_back_to_group( member_name )
     db_requests.remove_member_kick_date( member_name )
+
+
+get_list_of_kicked_users()
